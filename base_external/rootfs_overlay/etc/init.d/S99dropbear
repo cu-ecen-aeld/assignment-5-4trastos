@@ -1,0 +1,14 @@
+#!/bin/sh
+# Dropbear SSH server init script para QEMU/Buildroot
+
+# Crear directorio si no existe
+[ ! -d /etc/dropbear ] && mkdir -p /etc/dropbear
+
+# Generar host keys si faltan
+[ ! -f /etc/dropbear/dropbear_rsa_host_key ] && dropbearkey -t rsa -f /etc/dropbear/dropbear_rsa_host_key
+[ ! -f /etc/dropbear/dropbear_ed25519_host_key ] && dropbearkey -t ed25519 -f /etc/dropbear/dropbear_ed25519_host_key
+[ ! -f /etc/dropbear/dropbear_ecdsa_host_key ] && dropbearkey -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key
+
+# Arrancar Dropbear
+/usr/sbin/dropbear -R -E -p 22
+

@@ -1,0 +1,3 @@
+#!/bin/sh
+# Alimentar /dev/random con /dev/urandom para QEMU/Buildroot
+dd if=/dev/urandom of=/dev/random bs=1024 count=1 2>/dev/null
